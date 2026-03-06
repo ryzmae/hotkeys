@@ -21,7 +21,10 @@ export interface HotkeyRecorderState {
 /**
  * Initial idle state for the recorder, used when not recording.
  */
-const IDLE_STATE: HotkeyRecorderState = { isRecording: false, recordedHotkey: null }
+const IDLE_STATE: HotkeyRecorderState = {
+  isRecording: false,
+  recordedHotkey: null,
+}
 
 /**
  * Options for configuring a HotkeyRecorder instance.
@@ -79,7 +82,9 @@ export class HotkeyRecorder {
    * The TanStack Store instance containing the recorder state.
    * Use this to subscribe to state changes or access current state.
    */
-  readonly store: Store<HotkeyRecorderState> = new Store<HotkeyRecorderState>(IDLE_STATE)
+  readonly store: Store<HotkeyRecorderState> = new Store<HotkeyRecorderState>(
+    IDLE_STATE,
+  )
 
   #keydownHandler: ((event: KeyboardEvent) => void) | null = null
   #options: HotkeyRecorderOptions
@@ -201,7 +206,7 @@ export class HotkeyRecorder {
     }
 
     // Update store state
-    this.store.setState(() => (IDLE_STATE))
+    this.store.setState(() => IDLE_STATE)
   }
 
   /**
@@ -218,7 +223,7 @@ export class HotkeyRecorder {
     }
 
     // Update store state
-    this.store.setState(() => (IDLE_STATE))
+    this.store.setState(() => IDLE_STATE)
 
     // Call cancel callback
     this.#options.onCancel?.()
